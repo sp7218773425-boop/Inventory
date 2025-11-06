@@ -34,12 +34,13 @@ exports.create = async (req, res) => {
     const productId = result.insertId;
 
     
-    await db.query(
-      `INSERT INTO stock (product_id, product_name, qty, total_stock_value)
-       VALUES (?, ?, 0, 0)
-       ON DUPLICATE KEY UPDATE product_name = VALUES(product_name)`,
-      [productId, name]
-    );
+   await db.query(
+  `INSERT INTO stock (product_id, product_name, total_quantity, total_stock_value)
+   VALUES (?, ?, 0, 0)
+   ON DUPLICATE KEY UPDATE product_name = VALUES(product_name)`,
+  [productId, name]
+);
+
 
     console.log("✅ Stock entry created for:", productId, name);
 
